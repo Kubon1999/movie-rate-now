@@ -28,7 +28,9 @@ function App() {
 
   useEffect(() => {
     axios.get(url).then((response) => {
-      setApiConfiguration(response.data);
+      const temp = new Object(response.data);
+      temp.apiKey = "8fec1c7af2cd769b4da8683430f356c5";
+      setApiConfiguration(temp);
     });
   }, [url]);
 
