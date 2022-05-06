@@ -22,14 +22,27 @@ const Browse = () => {
   }, [apiConfiguration]);
 
   return (
-    <div className="border">
-      {trendingMovies ? (
-        trendingMovies.results.map((element, key) => {
-          return <MovieCard data={element} key={key} />;
-        })
-      ) : (
-        <p>loading...</p>
-      )}
+    <div className=" container">
+      <div className=" row gx-1 gy-1 ">
+        {trendingMovies ? (
+          trendingMovies.results.map((element, key) => {
+            if (key % 2) {
+              return (
+                <div className="col col-md movieCardL" key={key}>
+                  <MovieCard data={element} />
+                </div>
+              );
+            }
+            return (
+              <div className="col col-md movieCardR" key={key}>
+                <MovieCard data={element} />
+              </div>
+            );
+          })
+        ) : (
+          <p>loading...</p>
+        )}
+      </div>
     </div>
   );
 };

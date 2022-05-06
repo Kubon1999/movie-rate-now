@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import ApiContext from "./ApiContext";
+import { Image } from "react-bootstrap/Image";
 
 const MovieCard = (props) => {
   const { data } = props;
   const apiConfiguration = useContext(ApiContext);
   const [posterUrl, setPosterUrl] = useState("");
-
+  console.log(data);
   useEffect(() => {
     if (apiConfiguration) {
       //get the poster of a movie
@@ -23,13 +24,21 @@ const MovieCard = (props) => {
       setPosterUrl(final_url);
     }
   }, [apiConfiguration]);
-
-  //if (apiConfiguration) return apiConfiguration.images.base_url;
-  //console.log(data);
+  //width of an poster must be 150 (original = 390) (150/390 = 0.38)
+  // so height will be 577 (original) = (570*0.38 = 216)
   return (
     <>
-      {posterUrl ? <img src={posterUrl} /> : <p>loading img</p>}
-      <h1> {data.title} </h1>
+      {posterUrl ? (
+        <img
+          src={posterUrl}
+          className="rounded"
+          alt={data.title}
+          width="140"
+          height="216"
+        />
+      ) : (
+        <p>loading img</p>
+      )}
     </>
   );
 };
