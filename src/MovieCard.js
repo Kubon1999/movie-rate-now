@@ -7,7 +7,7 @@ const MovieCard = (props) => {
   const { data } = props;
   const apiConfiguration = useContext(ApiContext);
   const [posterUrl, setPosterUrl] = useState("");
-  console.log(data);
+
   useEffect(() => {
     if (apiConfiguration) {
       //get the poster of a movie

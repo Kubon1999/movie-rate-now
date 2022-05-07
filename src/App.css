@@ -1,5 +1,6 @@
 .content {
   max-width: 960px;
+  background-color: #141414;
 }
 .movieCardR {
   text-align: right;
@@ -19,4 +20,8 @@
 .star {
   text-align: right;
   padding: 0px;
+}
+
+h2 {
+  color: white;
 }

@@ -10,6 +10,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useEffect, useState } from "react";
 import Browse from "./Browse.js";
+import { MantineProvider } from "@mantine/core";
 
 firebase.initializeApp({
   apiKey: "AIzaSyDVrBdO44BUwk5YcqWFkdpVGsJUwkawGas",
@@ -36,11 +37,17 @@ function App() {
 
   return (
     <div className="App">
-      <ApiContext.Provider value={apiConfiguration}>
-        <div className="content">
-          <Browse />
-        </div>
-      </ApiContext.Provider>
+      <MantineProvider
+        theme={{ colorScheme: "dark" }}
+        withGlobalStyles
+        withNormalizeCSS
+      >
+        <ApiContext.Provider value={apiConfiguration}>
+          <div className="content">
+            <Browse />
+          </div>
+        </ApiContext.Provider>
+      </MantineProvider>
     </div>
   );
 }
