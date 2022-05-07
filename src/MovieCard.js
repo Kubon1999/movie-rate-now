@@ -9,7 +9,7 @@ const MovieCard = (props) => {
   const [posterUrl, setPosterUrl] = useState("");
 
   useEffect(() => {
-    if (apiConfiguration) {
+    if (data) {
       //get the poster of a movie
       //example:
       //https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg
@@ -23,7 +23,7 @@ const MovieCard = (props) => {
         apiConfiguration.apiKey;
       setPosterUrl(final_url);
     }
-  }, [apiConfiguration]);
+  }, [data.title]);
   //width of an poster must be 150 (original = 390) (150/390 = 0.38)
   // so height will be 577 (original) = (570*0.38 = 216)
   return (

@@ -3,76 +3,77 @@ import MovieCard from "./MovieCard";
 import ApiContext from "./ApiContext";
 import { useEffect, useContext, useState } from "react";
 import { Select } from "@mantine/core";
+import Results from "./Results";
 
 const Browse = () => {
   //get the trending data from api
   //api.themoviedb.org/3/trending/all/day?api_key=<<api_key>>
   const apiConfiguration = useContext(ApiContext);
-  const [trendingMovies, setTrendingMovies] = useState();
+  const [movies, setMovies] = useState();
   const [categories, setCategories] = useState();
-  const [category, setCategory] = useState();
+  const [category, setCategory] = useState({ name: "Action", id: 28 });
 
   useEffect(() => {
-    if (apiConfiguration) {
-      //fetch trending movies from api
-      axios
-        .get(
-          `https://api.themoviedb.org/3/trending/all/day?api_key=${apiConfiguration.apiKey}`
-        )
-        .then((response) => {
-          setTrendingMovies(response.data);
-        });
-      setCategory("Trending");
-      //fetch categories from the api
-      axios
-        .get(
-          `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiConfiguration.apiKey}`
-        )
-        .then((response) => {
-          let categoriesNames = response.data.genres.map((elem, key) => {
-            return elem.name;
-          });
-          categoriesNames.push("Trending");
-          setCategories(categoriesNames);
-        });
+    if (!apiConfiguration.loading) {
+      console.log("here");
+      requestCategories();
+      requestMovies();
     }
   }, [apiConfiguration]);
 
+  useEffect(() => {
+    requestMovies();
+  }, [category]);
+
+  async function requestMovies() {
+    console.log(category.id);
+    axios
+      .get(
+        `https://api.themoviedb.org/3/discover/movie?api_key=${apiConfiguration.apiKey}&language=en-US&with_genres=${category.id}`
+      )
+      .then((response) => {
+        console.log("got new movies");
+        console.log(response.data);
+        setMovies(response.data);
+      });
+  }
+
+  async function requestCategories() {
+    //fetch categories from the api
+    axios
+      .get(
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiConfiguration.apiKey}`
+      )
+      .then((response) => {
+        const categoriesForSelect = response.data.genres.map((elem, key) => {
+          return { label: elem.name, value: elem, key: key };
+        });
+        setCategories(categoriesForSelect);
+      });
+  }
+  function somefunc(e) {
+    console.log(e);
+  }
   return (
     <div className="container">
       {categories ? (
         <Select
           label="Category"
-          placeholder="Pick one"
+          placeholder="Choose"
           searchable
           nothingFound="Not found"
           data={categories}
           clearable
           className="py-3 px-4"
-          value={category}
-          onChange={setCategory}
+          onChange={(e) => {
+            console.log("setting new cat");
+            console.log(e);
+            setCategory(e);
+          }}
         />
       ) : null}
-      <div className=" row gx-3 gy-3 ">
-        {trendingMovies ? (
-          trendingMovies.results.map((element, key) => {
-            if (key % 2) {
-              return (
-                <div className="col col-md movieCardL" key={key}>
-                  <MovieCard data={element} />
-                </div>
-              );
-            }
-            return (
-              <div className="col col-md movieCardR" key={key}>
-                <MovieCard data={element} />
-              </div>
-            );
-          })
-        ) : (
-          <p>loading...</p>
-        )}
-      </div>
+
+      <Results movies={movies} />
     </div>
   );
 };

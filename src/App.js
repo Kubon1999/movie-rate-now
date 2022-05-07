@@ -25,12 +25,13 @@ firebase.initializeApp({
 function App() {
   const url =
     "https://api.themoviedb.org/3/configuration?api_key=8fec1c7af2cd769b4da8683430f356c5";
-  const [apiConfiguration, setApiConfiguration] = useState();
+  const [apiConfiguration, setApiConfiguration] = useState({ loading: true });
 
   useEffect(() => {
     axios.get(url).then((response) => {
       const temp = new Object(response.data);
       temp.apiKey = "8fec1c7af2cd769b4da8683430f356c5";
+      temp.loading = false;
       setApiConfiguration(temp);
     });
   }, [url]);
