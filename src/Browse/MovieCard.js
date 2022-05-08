@@ -1,7 +1,5 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import ApiContext from "./ApiContext";
-import { Image } from "react-bootstrap/Image";
+import ApiContext from "../ApiContext";
 
 const MovieCard = (props) => {
   const { data } = props;

@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import firebase from "firebase/compat/app";
@@ -6,11 +5,14 @@ import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import axios from "axios";
 import ApiContext from "./ApiContext";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useEffect, useState } from "react";
-import Browse from "./Browse.js";
+import Browse from "./Browse/Browse.js";
 import { MantineProvider } from "@mantine/core";
+import BottomNavbar from "./BottomNavbar";
+import Home from "./Home/Home.js";
+import Social from "./Social/Social.js";
+import Person from "./Person/Person.js";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 firebase.initializeApp({
   apiKey: "AIzaSyDVrBdO44BUwk5YcqWFkdpVGsJUwkawGas",
@@ -45,7 +47,16 @@ function App() {
       >
         <ApiContext.Provider value={apiConfiguration}>
           <div className="content">
-            <Browse />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Browse />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/browse" element={<Browse />} />
+                <Route path="/social" element={<Social />} />
+                <Route path="/person" element={<Person />} />
+              </Routes>
+              <BottomNavbar />
+            </BrowserRouter>
           </div>
         </ApiContext.Provider>
       </MantineProvider>

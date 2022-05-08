@@ -1,6 +1,5 @@
 import axios from "axios";
-import MovieCard from "./MovieCard";
-import ApiContext from "./ApiContext";
+import ApiContext from "../ApiContext";
 import { useEffect, useContext, useState } from "react";
 import { Select } from "@mantine/core";
 import Results from "./Results";
@@ -15,25 +14,23 @@ const Browse = () => {
 
   useEffect(() => {
     if (!apiConfiguration.loading) {
-      console.log("here");
       requestCategories();
       requestMovies();
     }
   }, [apiConfiguration]);
 
   useEffect(() => {
-    requestMovies();
+    if (!apiConfiguration.loading) {
+      requestMovies();
+    }
   }, [category]);
 
   async function requestMovies() {
-    console.log(category.id);
     axios
       .get(
         `https://api.themoviedb.org/3/discover/movie?api_key=${apiConfiguration.apiKey}&language=en-US&with_genres=${category.id}`
       )
       .then((response) => {
-        console.log("got new movies");
-        console.log(response.data);
         setMovies(response.data);
       });
   }
@@ -54,27 +51,32 @@ const Browse = () => {
   function somefunc(e) {
     console.log(e);
   }
-  return (
-    <div className="container">
-      {categories ? (
-        <Select
-          label="Category"
-          placeholder="Choose"
-          searchable
-          nothingFound="Not found"
-          data={categories}
-          clearable
-          className="py-3 px-4"
-          onChange={(e) => {
-            console.log("setting new cat");
-            console.log(e);
-            setCategory(e);
-          }}
-        />
-      ) : null}
 
-      <Results movies={movies} />
-    </div>
+  return (
+    <>
+      <div className="container">
+        {categories ? (
+          <div className="top-navbar">
+            <Select
+              label="Category"
+              placeholder="Choose"
+              searchable
+              nothingFound="Not found"
+              data={categories}
+              clearable
+              className="py-3 px-4"
+              onChange={(e) => {
+                console.log("setting new cat");
+                console.log(e);
+                setCategory(e);
+              }}
+            />
+          </div>
+        ) : null}
+
+        <Results movies={movies} />
+      </div>
+    </>
   );
 };
 
