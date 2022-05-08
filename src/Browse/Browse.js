@@ -8,7 +8,7 @@ const Browse = () => {
   //get the trending data from api
   //api.themoviedb.org/3/trending/all/day?api_key=<<api_key>>
   const apiConfiguration = useContext(ApiContext);
-  const [movies, setMovies] = useState();
+  const [movies, setMovies] = useState({ loading: true });
   const [categories, setCategories] = useState();
   const [category, setCategory] = useState({ name: "Action", id: 28 });
 
@@ -66,8 +66,6 @@ const Browse = () => {
               clearable
               className="py-3 px-4"
               onChange={(e) => {
-                console.log("setting new cat");
-                console.log(e);
                 setCategory(e);
               }}
             />

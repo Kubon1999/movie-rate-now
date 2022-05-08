@@ -22,8 +22,14 @@
   padding: 0px;
 }
 
-h2 {
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
   color: white;
+  text-align: center;
 }
 
 /* Place the navbar at the bottom of the page, and make it stick */
@@ -52,4 +58,13 @@ h2 {
 .active i {
   color: #228be6; /* Add an active/current color */
   font-size: 30px; /* Increased font size */
+}
+
+h5 {
+  text-align: center !important;
+  background-color: #000;
+}
+
+.container {
+  background-color: #000;
 }
