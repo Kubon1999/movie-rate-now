@@ -38,6 +38,29 @@ function App() {
     });
   }, [url]);
 
+  useEffect(() => {
+    if (!apiConfiguration.loading) {
+      const genres = [];
+      requestGenres("tv", genres);
+      requestGenres("movie", genres);
+    }
+  }, [apiConfiguration]);
+
+  async function requestGenres(movieOrTv, genres) {
+    axios
+      .get(
+        `https://api.themoviedb.org/3/genre/${movieOrTv}/list?api_key=${apiConfiguration.apiKey}`
+      )
+      .then((response) => {
+        response.data.genres.map((elem) => {
+          genres.push(elem);
+        });
+        const temp = new Object(apiConfiguration);
+        temp.genres = genres;
+        setApiConfiguration(temp);
+      });
+  }
+
   return (
     <div>
       <MantineProvider

@@ -156,6 +156,9 @@ figure:hover figcaption {
 }
 
 .modal-card-item {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
 }
 
 .modal-card-item h1 {
@@ -181,6 +184,7 @@ figure:hover figcaption {
   margin-top: 15%;
   margin-left: -50px; /* becasue we need to substract te element/2 width from the margin left */
   font-size: 100px;
+  opacity: 0.85;
 }
 .modal-card-item iframe {
   position: absolute;
@@ -190,8 +194,31 @@ figure:hover figcaption {
   height: 60%;
 }
 
+.genre-name {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  border: white solid 1px;
+  border-radius: 0.2rem;
+}
+
 .modal-card-item img {
   width: 100%;
   border-radius: 12px 12px 0 0;
   padding-bottom: 10px;
+}
+
+.modal-card-item h3 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.modal-card-item h1 {
+  padding-right: 0.5rem;
+}
+
+.fa-star {
+  color: #ffc100;
+  font-size: 2rem;
+  padding-bottom: 1rem; /* to center it we need ton fontsize/2 = paddingbottom */
 }

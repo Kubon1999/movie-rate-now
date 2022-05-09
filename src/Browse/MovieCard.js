@@ -100,13 +100,27 @@ const MovieCard = (props) => {
 
               <div className="modal-card-item">
                 <h1>{data.media_type == "tv" ? data.name : data.title}</h1>
-              </div>
-              <div className="modal-card-item">
                 <p>
                   {data.media_type == "tv"
                     ? data.first_air_date.substring(0, 4)
                     : data.release_date.substring(0, 4)}
                 </p>
+              </div>
+              <div className="modal-card-item">
+                <i className="fa fa-star" aria-hidden="true"></i>
+                <h3>{data.vote_average}</h3>
+                <p>{data.vote_count} votes</p>
+                {data.genre_ids.map((genre) => {
+                  return apiConfiguration.genres.map((genre_2, key) => {
+                    if (genre === genre_2.id) {
+                      return (
+                        <p className="genre-name" key={key}>
+                          {genre_2.name}
+                        </p>
+                      );
+                    }
+                  });
+                })}
               </div>
               <div className="modal-card-item">
                 <p>{data.overview}</p>

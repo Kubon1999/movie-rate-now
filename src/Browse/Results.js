@@ -19,7 +19,7 @@ const Results = ({ movies }) => {
         setter(temp);
       });
   }
-  console.log(movies);
+
   return (
     <div className="flex-container">
       {!movies.loading ? (
