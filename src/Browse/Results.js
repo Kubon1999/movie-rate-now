@@ -21,35 +21,36 @@ const Results = ({ movies }) => {
   }
   console.log(movies);
   return (
-    <div className=" row gx-3 gy-3 ">
+    <div className="flex-container">
       {!movies.loading ? (
         movies.results.map((element, key) => {
           if (key % 2) {
             return (
-              <div className="col-6 movieCardL" key={key}>
+              <div className="item" key={key}>
                 <MovieCard data={element} />
               </div>
             );
           }
-          if (key % 4 && element.media_type == "movie") {
-            requestMovieVideos(key, element.id, setMoviesVideoId);
-            console.log(key);
-            console.log(element.id);
-            return (
-              <div className="col-12 video-player" key={key}>
-                <ReactPlayer
-                  url={`https://www.youtube.com/embed/${moviesVideoId[key]}`}
-                  playing={!key ? true : false}
-                  controls={false}
-                  width="280"
-                  height="216"
-                />
-                <h5>{element.original_title}</h5>
-              </div>
-            );
-          }
+          // if (key % 4 && element.media_type == "movie") {
+          //   requestMovieVideos(key, element.id, setMoviesVideoId);
+          //   console.log(key);
+          //   console.log(element.id);
+          //   return (
+          //     <div className="item-2 video-player" key={key}>
+          //       <ReactPlayer
+          //         url={`https://www.youtube.com/embed/${moviesVideoId[key]}`}
+          //         //playing={!key ? true : false} - changed to false it is getting annoying...
+          //         playing={false}
+          //         controls={false}
+          //         width="280"
+          //         height="216"
+          //       />
+          //       <h5>{element.original_title}</h5>
+          //     </div>
+          //   );
+          // }
           return (
-            <div className="col-6 movieCardR" key={key}>
+            <div className="item" key={key}>
               <MovieCard data={element} />
             </div>
           );

@@ -39,25 +39,23 @@ function App() {
   }, [url]);
 
   return (
-    <div className="App">
+    <div>
       <MantineProvider
         theme={{ colorScheme: "dark" }}
         withGlobalStyles
         withNormalizeCSS
       >
         <ApiContext.Provider value={apiConfiguration}>
-          <div className="content">
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Browse />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/browse" element={<Browse />} />
-                <Route path="/social" element={<Social />} />
-                <Route path="/person" element={<Person />} />
-              </Routes>
-              <BottomNavbar />
-            </BrowserRouter>
-          </div>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Browse />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/browse" element={<Browse />} />
+              <Route path="/social" element={<Social />} />
+              <Route path="/person" element={<Person />} />
+            </Routes>
+            <BottomNavbar />
+          </BrowserRouter>
         </ApiContext.Provider>
       </MantineProvider>
     </div>

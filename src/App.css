@@ -1,35 +1,5 @@
-.content {
-  max-width: 960px;
-  background-color: #141414;
-}
-.movieCardR {
-  text-align: right;
-}
-
-.movieCardL {
-  text-align: left;
-}
-
-@media (min-width: 576) {
-  .movieCardL,
-  .movieCardR {
-    text-align: center;
-  }
-}
-
-.star {
-  text-align: right;
-  padding: 0px;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-p {
-  color: white;
-  text-align: center;
+:root {
+  --front-size: 1.3rem;
 }
 
 /* Place the navbar at the bottom of the page, and make it stick */
@@ -60,11 +30,95 @@ p {
   font-size: 30px; /* Increased font size */
 }
 
-h5 {
-  text-align: center !important;
-  background-color: #000;
+html {
+  box-sizing: border-box; /*lets include the border and padding as well to determine the width*/
+  color: white;
 }
 
-.container {
+*,
+*::before,
+*::after {
+  box-sizing: inherit; /* always border-box - easier to calculate */
+}
+
+body {
+  /*some browsers have padding some margins */
+  margin: 0;
+  padding: 0;
+}
+
+figure {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+figcaption {
   background-color: #000;
+  position: absolute;
+  width: 100%;
+  /* opacity: 0.7;*/
+
+  position: absolute;
+  bottom: -2%;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+  opacity: 0;
+}
+
+figure:hover figcaption {
+  opacity: 0.7;
+  bottom: 0%;
+}
+
+.flex-container {
+  padding: 5%;
+  padding-bottom: 20%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: stretch;
+  gap: 5%;
+}
+
+/*default -  mobile */
+.item {
+  flex-basis: 47.5%; /* gap 5% 100-5 = 95 / 2 = 47.5 */
+  padding-bottom: 1rem;
+}
+
+.item-w2 {
+  flex-basis: 100%; /* gap 5% 100-5 = 95 / 2 = 47.5 */
+}
+
+.item img {
+  /* width="140" height="216" */
+  max-width: 300px;
+  width: 100%;
+  height: 100%;
+  /*padding-bottom: 1rem;*/
+}
+
+/*tablets */
+@media (min-width: 530px) {
+  .flex-container {
+    padding-bottom: 10%;
+  }
+  .item {
+    flex-basis: 30%; /* for bigger screen show 3 movie cards */
+    /* 100 - 5% * 2 gaps = 90 /3 = 30 */
+    padding-bottom: 2rem;
+  }
+}
+
+/*desktop*/
+@media (min-width: 800px) {
+  .item {
+    flex-basis: 21.25%; /* for desktop screen show 5 movie cards */
+    /* 100 - 5% * 3 gaps = 85 / 4 = 21.25 */
+    padding-bottom: 3rem;
+  }
 }

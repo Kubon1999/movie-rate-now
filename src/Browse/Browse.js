@@ -48,32 +48,25 @@ const Browse = () => {
         setCategories(categoriesForSelect);
       });
   }
-  function somefunc(e) {
-    console.log(e);
-  }
 
   return (
     <>
-      <div className="container">
-        {categories ? (
-          <div className="top-navbar">
-            <Select
-              label="Category"
-              placeholder="Choose"
-              searchable
-              nothingFound="Not found"
-              data={categories}
-              clearable
-              className="py-3 px-4"
-              onChange={(e) => {
-                setCategory(e);
-              }}
-            />
-          </div>
-        ) : null}
+      {categories ? (
+        <Select
+          label="Category"
+          placeholder="Choose"
+          searchable
+          nothingFound="Not found"
+          data={categories}
+          clearable
+          className="py-3 px-4"
+          onChange={(e) => {
+            setCategory(e);
+          }}
+        />
+      ) : null}
 
-        <Results movies={movies} />
-      </div>
+      <Results movies={movies} />
     </>
   );
 };

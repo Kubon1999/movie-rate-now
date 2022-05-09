@@ -59,14 +59,14 @@ const Home = () => {
 
   return (
     <>
-      <div className="container">
+      <div>
         <h1> Trending movies</h1>
 
-        {movieVideo ? (
+        {/* {movieVideo ? (
           <div className="video-player">
             <ReactPlayer
               url={`https://www.youtube.com/embed/${movieVideo}`}
-              playing={true}
+              playing={false}
               controls={false}
               width="280"
               height="216"
@@ -75,7 +75,7 @@ const Home = () => {
           </div>
         ) : (
           <p>loading</p>
-        )}
+        )} */}
         <Results movies={trendingMovies} />
         <h1> Trending Tv Shows</h1>
         <Results movies={trendingTvShows} />

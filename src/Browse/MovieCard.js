@@ -27,13 +27,13 @@ const MovieCard = (props) => {
   return (
     <>
       {posterUrl ? (
-        <img
-          src={posterUrl}
-          className="rounded"
-          alt={data.title}
-          width="140"
-          height="216"
-        />
+        <figure>
+          <img src={posterUrl} className="rounded" alt={data.title} />
+          <figcaption>
+            <h2>{data.title}</h2>
+            <p>descirption</p>
+          </figcaption>
+        </figure>
       ) : (
         <p>loading img</p>
       )}
