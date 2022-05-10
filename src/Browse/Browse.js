@@ -1,14 +1,14 @@
 import axios from "axios";
 import ApiContext from "../ApiContext";
 import { useEffect, useContext, useState } from "react";
-import { Select } from "@mantine/core";
+import { Select, SegmentedControl } from "@mantine/core";
 import Results from "./Results";
 
 const Browse = () => {
   //get the trending data from api
   //api.themoviedb.org/3/trending/all/day?api_key=<<api_key>>
   const apiConfiguration = useContext(ApiContext);
-  const [movies, setMovies] = useState({ loading: true });
+  const [movies, setMovies] = useState({ loading: true, media_type: "movie" });
   const [categories, setCategories] = useState();
   const [category, setCategory] = useState({ name: "Action", id: 28 });
 
@@ -52,21 +52,22 @@ const Browse = () => {
   return (
     <>
       {categories ? (
-        <Select
-          label="Category"
-          placeholder="Choose"
-          searchable
-          nothingFound="Not found"
-          data={categories}
-          clearable
-          className="py-3 px-4"
-          onChange={(e) => {
-            setCategory(e);
-          }}
-        />
+        <>
+          <Select
+            label="Category"
+            placeholder="Choose genre"
+            searchable
+            nothingFound="Not found"
+            data={categories}
+            clearable
+            className="py-3 px-4"
+            onChange={(e) => {
+              setCategory(e);
+            }}
+          />
+          <Results movies={movies} />
+        </>
       ) : null}
-
-      <Results movies={movies} />
     </>
   );
 };

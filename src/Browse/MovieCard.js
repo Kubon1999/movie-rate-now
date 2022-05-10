@@ -2,7 +2,6 @@ import Modal from "../Modal";
 import { useContext, useEffect, useState } from "react";
 import ApiContext from "../ApiContext";
 import axios from "axios";
-import ReactPlayer from "react-player";
 
 const MovieCard = (props) => {
   const { data } = props;
@@ -35,6 +34,9 @@ const MovieCard = (props) => {
         apiConfiguration.apiKey;
       setBackDropUrl(final_url_backdrop);
     }
+    if (!data.media_type) {
+      data.media_type = "movie";
+    }
   }, [data.title]);
 
   async function requestMovieVideos(movieId, setter) {
@@ -45,6 +47,36 @@ const MovieCard = (props) => {
       .then((response) => {
         setter(response.data.results[0].key);
       });
+  }
+
+  function readableTrailerVideoLogic() {
+    if (showVideo && videoUrl) {
+      //if you should show video and there exists an trailer
+      //then show video
+      return (
+        <div className="modal-card-item">
+          <iframe
+            src={`https://www.youtube.com/embed/${videoUrl}`}
+            height="100%"
+            width="100%"
+            frameBorder="0"
+            allow="autoplay"
+          ></iframe>
+        </div>
+      );
+    } else if (!videoUrl) {
+      //the trailer does not exist
+      //then dont show any option
+      return null;
+    } else {
+      return (
+        <i
+          className="fa fa-play-circle"
+          aria-hidden="true"
+          onClick={() => setShowVideo(true)}
+        ></i>
+      );
+    }
   }
 
   return (
@@ -80,24 +112,7 @@ const MovieCard = (props) => {
                 backgroundPosition: "center",
               }}
             >
-              {showVideo ? (
-                <div className="modal-card-item">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${videoUrl}`}
-                    height="100%"
-                    width="100%"
-                    frameBorder="0"
-                    allow="autoplay"
-                  ></iframe>
-                </div>
-              ) : (
-                <i
-                  className="fa fa-play-circle"
-                  aria-hidden="true"
-                  onClick={() => setShowVideo(true)}
-                ></i>
-              )}
-
+              {readableTrailerVideoLogic()}
               <div className="modal-card-item">
                 <h1>{data.media_type == "tv" ? data.name : data.title}</h1>
               </div>

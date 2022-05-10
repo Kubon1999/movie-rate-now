@@ -254,3 +254,7 @@ make it a small white text with nice border */
     text-align: left;
   }
 }
+
+#err {
+  color: red;
+}
