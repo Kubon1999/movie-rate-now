@@ -40,23 +40,23 @@ function App() {
 
   useEffect(() => {
     if (!apiConfiguration.loading) {
-      const genres = [];
-      requestGenres("tv", genres);
-      requestGenres("movie", genres);
+      requestGenres("tv");
+      requestGenres("movie");
     }
   }, [apiConfiguration]);
 
-  async function requestGenres(movieOrTv, genres) {
+  async function requestGenres(movieOrTv) {
     axios
       .get(
         `https://api.themoviedb.org/3/genre/${movieOrTv}/list?api_key=${apiConfiguration.apiKey}`
       )
       .then((response) => {
+        const genres = [];
         response.data.genres.map((elem) => {
           genres.push(elem);
         });
         const temp = new Object(apiConfiguration);
-        temp.genres = genres;
+        temp[movieOrTv] = genres;
         setApiConfiguration(temp);
       });
   }
