@@ -79,6 +79,23 @@ const MovieCard = (props) => {
     }
   }
 
+  function readableGenres() {
+    return data.genre_ids.map((genre) => {
+      //return max: 3 genres to not make a list of 7 genres in one movie
+      return apiConfiguration[data.media_type]
+        .slice(0, 4)
+        .map((genre_2, key) => {
+          if (genre === genre_2.id) {
+            return (
+              <p className="genre-name" key={key}>
+                {genre_2.name}
+              </p>
+            );
+          }
+        });
+    });
+  }
+
   return (
     <>
       {posterUrl ? (
@@ -89,14 +106,16 @@ const MovieCard = (props) => {
           }}
         >
           <img src={posterUrl} className="rounded" alt={data.title} />
-          <figcaption>
-            <h2>{data.media_type == "tv" ? data.name : data.title}</h2>
-            <p>{data.vote_average}</p>
-            <p>
-              {data.media_type == "tv"
-                ? data.first_air_date.substring(0, 4)
-                : data.release_date.substring(0, 4)}
-            </p>
+          <figcaption className="fig-container">
+            <div className="fig-item-100">
+              <h2> {data.media_type == "tv" ? data.name : data.title}</h2>
+            </div>
+            <div className="fig-item">
+              <i className="fa fa-star" aria-hidden="true"></i>
+            </div>
+            <div className="fig-item">
+              <p>{data.vote_average}</p>
+            </div>
           </figcaption>
         </figure>
       ) : (
@@ -110,6 +129,8 @@ const MovieCard = (props) => {
               style={{
                 backgroundImage: `url(${backdropUrl})`,
                 backgroundPosition: "center",
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
               }}
             >
               {readableTrailerVideoLogic()}
@@ -122,20 +143,7 @@ const MovieCard = (props) => {
                     ? data.first_air_date.substring(0, 4)
                     : data.release_date.substring(0, 4)}
                 </p>
-                {data.genre_ids.map((genre) => {
-                  //return max: 3 genres to not make a list of 7 genres in one movie
-                  return apiConfiguration[data.media_type]
-                    .slice(0, 4)
-                    .map((genre_2, key) => {
-                      if (genre === genre_2.id) {
-                        return (
-                          <p className="genre-name" key={key}>
-                            {genre_2.name}
-                          </p>
-                        );
-                      }
-                    });
-                })}
+                {readableGenres()}
               </div>
               <div className="modal-card-item">
                 <i className="fa fa-star" aria-hidden="true"></i>

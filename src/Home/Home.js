@@ -59,7 +59,7 @@ const Home = () => {
 
   return (
     <>
-      <div>
+      <div className="home-titles">
         <h1> Trending movies</h1>
 
         {/* {movieVideo ? (

@@ -9,12 +9,12 @@ const BottomNavbar = () => {
         <i className="fa fa-search"></i>
       </NavLink>
 
-      <NavLink to="/social">
+      {/* <NavLink to="/social">
         <i className="fa fa-heart"></i>
       </NavLink>
       <NavLink to="/person">
         <i className="fa fa-user"></i>
-      </NavLink>
+      </NavLink> */}
     </div>
   );
 };

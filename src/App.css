@@ -14,7 +14,7 @@
 .bottom-navbar a {
   float: left; /* Float links side by side */
   text-align: center; /* Center-align text */
-  width: 25%; /* Equal width (5 icons with 20% width each = 100%) */
+  width: 50%; /* Equal width (5 icons with 20% width each = 100%) */
   padding: 12px 0; /* Some top and bottom padding */
   transition: all 0.3s ease; /* Add transition for hover effects */
   color: white; /* White text color */
@@ -60,8 +60,6 @@ figcaption {
   position: absolute;
   width: 100%;
   /* opacity: 0.7;*/
-
-  position: absolute;
   bottom: -2%;
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
@@ -69,13 +67,13 @@ figcaption {
 }
 
 figure:hover figcaption {
-  opacity: 0.7;
+  opacity: 0.9;
   bottom: 0%;
 }
 
 .flex-container {
   padding: 5%;
-  padding-bottom: 20%;
+  padding-bottom: 10%;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
@@ -97,7 +95,7 @@ figure:hover figcaption {
 
 .item img {
   /* width="140" height="216" */
-  max-width: 300px;
+  /*max-width: 300px; */
   width: 100%;
   height: 100%;
   /*padding-bottom: 1rem;*/
@@ -115,8 +113,17 @@ figure:hover figcaption {
 /*desktop*/
 @media (min-width: 800px) {
   .item {
-    flex-basis: 21.25%; /* for desktop screen show 5 movie cards */
+    flex-basis: 21.25%; /* for desktop screen show 4 movie cards */
     /* 100 - 5% * 3 gaps = 85 / 4 = 21.25 */
+    margin-bottom: 3rem;
+  }
+}
+
+/*large desktop*/
+@media (min-width: 1200px) {
+  .item {
+    flex-basis: 16%; /* for large desktop screen show 5 movie cards */
+    /* 100 - 5% * 4 gaps = 80 / 5 = 16 */
     margin-bottom: 3rem;
   }
 }
@@ -199,8 +206,6 @@ figure:hover figcaption {
 /* genre badge in modal>card>under movie title 
 make it a small white text with nice border */
 .genre-name {
-  margin-top: 0;
-  padding-top: 0;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   margin-left: 0.5rem;
@@ -257,4 +262,68 @@ make it a small white text with nice border */
 
 #err {
   color: red;
+}
+
+/* --- home --- */
+
+.home-titles h1 {
+  text-align: center;
+  color: rgb(255, 255, 255);
+  font-size: 2rem;
+  text-shadow: 0.4rem 0.4rem 1rem #000000;
+}
+
+@media (min-width: 500px) {
+  .home-titles h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 800px) {
+  .home-titles h1 {
+    font-size: 4rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .home-titles h1 {
+    font-size: 5rem;
+  }
+}
+
+/* -- figcaption --- */
+/* the black bar that shows when you hover on moviecard */
+
+.fig-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: center;
+  gap: 3%;
+}
+
+.fig-item {
+  padding: 0;
+  margin: 0;
+  flex-basis: 0%;
+}
+
+.fig-item i {
+  padding: 0;
+  margin: 0;
+}
+
+.fig-item p {
+  margin: auto;
+  font-size: 2rem;
+}
+
+.fig-item-100 {
+  flex-basis: 100%;
+}
+
+.fig-item-100 h2 {
+  text-align: center;
+  flex-basis: 100%;
 }
