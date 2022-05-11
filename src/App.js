@@ -13,6 +13,7 @@ import Home from "./Home/Home.js";
 import Social from "./Social/Social.js";
 import Person from "./Person/Person.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import TopNavbar from "./TopNavbar";
 
 firebase.initializeApp({
   apiKey: "AIzaSyDVrBdO44BUwk5YcqWFkdpVGsJUwkawGas",
@@ -70,6 +71,7 @@ function App() {
       >
         <ApiContext.Provider value={apiConfiguration}>
           <BrowserRouter>
+            <TopNavbar />
             <Routes>
               <Route path="/" element={<Browse />} />
               <Route path="/home" element={<Home />} />

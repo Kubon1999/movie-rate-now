@@ -327,3 +327,19 @@ make it a small white text with nice border */
   text-align: center;
   flex-basis: 100%;
 }
+
+/* top navbar */
+
+.topnav {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  gap: 5%;
+  padding: 2rem;
+  background-color: #2b2e33;
+}
+
+.topnav-link {
+  text-decoration-line: none;
+  color: white;
+}
