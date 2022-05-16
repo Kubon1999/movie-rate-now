@@ -11,6 +11,13 @@
   width: 100%;
 }
 
+/* do not show on dekstop */
+@media (min-width: 800px) {
+  .bottom-navbar {
+    display: none;
+  }
+}
+
 .bottom-navbar a {
   float: left; /* Float links side by side */
   text-align: center; /* Center-align text */
@@ -64,6 +71,7 @@ figcaption {
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
   opacity: 0;
+  font-family: "Sora", sans-serif;
 }
 
 figure:hover figcaption {
@@ -142,6 +150,7 @@ figure:hover figcaption {
   align-items: center;
   align-content: flex-end;
   flex-direction: column;
+  font-family: "Sora", sans-serif;
 }
 
 /* this is the card that shows up when you click on a movie to get details */
@@ -239,13 +248,17 @@ make it a small white text with nice border */
 @media (max-width: 530px) {
   /* descrese the size of description on the grounds that it took half of the space on card */
   .modal-card-item p {
-    font-size: 0.5rem;
+    font-size: 0.9rem;
+  }
+  /* change the video embedd to smaller on phones */
+  .modal-card-item iframe {
+    height: 26%;
   }
 
   /* move down a little the play button as the mobile devices and vertical */
   .modal-card .fa-play-circle {
     position: absolute;
-    top: 10%;
+    top: 0%;
     left: 50%;
     margin-top: 15%;
     margin-left: -50px; /* becasue we need to substract te element/2 width from the margin left */
@@ -266,25 +279,32 @@ make it a small white text with nice border */
 
 /* --- home --- */
 
+/* mobile */
 .home-titles h1 {
-  text-align: center;
+  text-align: left;
+  padding-left: 5%;
+  padding-top: 5%;
   color: rgb(255, 255, 255);
-  font-size: 2rem;
+  font-size: 1.3rem;
+  font-family: "Sora", sans-serif;
   text-shadow: 0.4rem 0.4rem 1rem #000000;
 }
 
+/* bigger mobile */
 @media (min-width: 500px) {
   .home-titles h1 {
     font-size: 3rem;
   }
 }
 
+/* desktop */
 @media (min-width: 800px) {
   .home-titles h1 {
     font-size: 4rem;
   }
 }
 
+/* big desktop */
 @media (min-width: 1200px) {
   .home-titles h1 {
     font-size: 5rem;
@@ -329,17 +349,29 @@ make it a small white text with nice border */
 }
 
 /* top navbar */
-
 .topnav {
   display: flex;
   flex-flow: row wrap;
-  align-content: flex-start;
+  justify-content: center;
   gap: 5%;
   padding: 2rem;
   background-color: #2b2e33;
+  font-size: 1.3rem;
+  font-family: "Sora", sans-serif;
 }
 
 .topnav-link {
-  text-decoration-line: none;
+  list-style: none;
   color: white;
+  text-decoration: none;
+}
+
+.active {
+  color: #228be6; /* Add an active/current color */
+}
+/* show only on desktop */
+@media (max-width: 800px) {
+  .topnav {
+    display: none;
+  }
 }

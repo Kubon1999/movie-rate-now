@@ -35,15 +35,19 @@ const Results = ({ movies }) => {
           //   requestMovieVideos(key, element.id, setMoviesVideoId);
           //   console.log(key);
           //   console.log(element.id);
+          //   const final_url_backdrop =
+          //     apiConfiguration.images.base_url +
+          //     "/w1280/" +
+          //     element.poster_path +
+          //     "?api_key=" +
+          //     apiConfiguration.apiKey;
           //   return (
-          //     <div className="item-2 video-player" key={key}>
-          //       <ReactPlayer
-          //         url={`https://www.youtube.com/embed/${moviesVideoId[key]}`}
-          //         //playing={!key ? true : false} - changed to false it is getting annoying...
-          //         playing={false}
-          //         controls={false}
-          //         width="280"
-          //         height="216"
+          //     <div className="item-2" key={key}>
+          //       <img
+          //         src={final_url_backdrop}
+          //         alt={
+          //           element.media_type == "tv" ? element.name : element.title
+          //         }
           //       />
           //       <h5>{element.original_title}</h5>
           //     </div>

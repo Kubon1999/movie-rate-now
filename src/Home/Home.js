@@ -61,21 +61,6 @@ const Home = () => {
     <>
       <div className="home-titles">
         <h1> Trending movies</h1>
-
-        {/* {movieVideo ? (
-          <div className="video-player">
-            <ReactPlayer
-              url={`https://www.youtube.com/embed/${movieVideo}`}
-              playing={false}
-              controls={false}
-              width="280"
-              height="216"
-            />
-            <h5>{trendingMovies.results[0].original_title}</h5>
-          </div>
-        ) : (
-          <p>loading</p>
-        )} */}
         <Results movies={trendingMovies} />
         <h1> Trending Tv Shows</h1>
         <Results movies={trendingTvShows} />

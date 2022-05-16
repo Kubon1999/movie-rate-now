@@ -3,22 +3,13 @@ import { NavLink } from "react-router-dom";
 const TopNavbar = () => {
   return (
     <div className="topnav">
-      <NavLink
-        to="/home"
-        style={(isActive) => ({
-          fontWeight: isActive ? "bold" : "normal",
-        })}
-        className="topnav-link"
-      >
+      <NavLink to="/home" className="topnav-link">
+        <img src="logo.svg" height="20px" alt="Professional movie camera" />
+      </NavLink>
+      <NavLink to="/home" className="topnav-link">
         Home
       </NavLink>
-      <NavLink
-        to="/browse"
-        style={(isActive) => ({
-          fontWeight: isActive ? "bold" : "normal",
-        })}
-        className="topnav-link"
-      >
+      <NavLink to="/browse" className="topnav-link">
         Movie genres
       </NavLink>
     </div>

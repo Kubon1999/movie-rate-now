@@ -151,7 +151,14 @@ const MovieCard = (props) => {
                 <p>{data.vote_count} votes</p>
               </div>
               <div className="modal-card-item">
-                <p>{data.overview}</p>
+                <p>
+                  {
+                    /* change later to scrollable description */ data.overview.substring(
+                      0,
+                      250
+                    )
+                  }
+                </p>
               </div>
               <i
                 className="fa fa-times"
