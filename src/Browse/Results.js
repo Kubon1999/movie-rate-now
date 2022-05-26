@@ -1,4 +1,4 @@
-import MovieCard from "./MovieCard";
+import MovieCard from "../Movie/MovieCard";
 import ReactPlayer from "react-player";
 import { useState, useContext } from "react";
 import axios from "axios";
