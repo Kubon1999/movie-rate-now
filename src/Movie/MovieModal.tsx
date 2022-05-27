@@ -9,7 +9,8 @@ import { ToggleButton } from "react-bootstrap";
 const MovieModal = (props: { movie: Movie; toggleModal: Function }) => {
   const apiConfiguration = useContext(ApiContext);
   const [showModal, setShowModal] = useState(false);
-  let bgImageUrl = `${apiConfiguration.images.base_url}w500/${props.movie.verticalImgUrl}?api_key=${apiConfiguration.apiKey}`;
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  let bgImageUrl = `${apiConfiguration.images.base_url}/w1280/${props.movie.verticalImgUrl}?api_key=${apiConfiguration.apiKey}`;
 
   useEffect(() => {
     requestMovieVideos();
@@ -27,6 +28,8 @@ const MovieModal = (props: { movie: Movie; toggleModal: Function }) => {
             return video.key;
           }
         });
+        console.log(props.movie.listOfTrailerUrl);
+        setVideoLoaded(true);
       });
   }
 
@@ -48,11 +51,13 @@ const MovieModal = (props: { movie: Movie; toggleModal: Function }) => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        {props.movie.listOfTrailerUrl && (
+        {videoLoaded ? (
           <MovieVideo videoUrl={props.movie.listOfTrailerUrl[0]} />
-        )}
+        ) : null}
         <div className="modal-card-item">
-          <h1>{props.movie.title}</h1>
+          <h1>
+            <b>{props.movie.title}</b>
+          </h1>
         </div>
         <div className="modal-card-item">
           <p id="release-date">{props.movie.year}</p>
