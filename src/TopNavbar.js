@@ -9,8 +9,8 @@ const TopNavbar = () => {
       <NavLink to="/home" className="topnav-link">
         Home
       </NavLink>
-      <NavLink to="/browse" className="topnav-link">
-        Movie genres
+      <NavLink to="/movies" className="topnav-link">
+        Movies
       </NavLink>
     </div>
   );

@@ -6,7 +6,6 @@ import "firebase/compat/auth";
 import axios from "axios";
 import ApiContext from "./ApiContext";
 import { useEffect, useState } from "react";
-import Browse from "./Browse/Browse.js";
 import { MantineProvider } from "@mantine/core";
 import BottomNavbar from "./BottomNavbar";
 import Home from "./Home/Home.js";
@@ -14,6 +13,8 @@ import Social from "./Social/Social.js";
 import Person from "./Person/Person.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TopNavbar from "./TopNavbar";
+import Movies from "./Movies/Movies";
+import { genres } from "./Movie/Movie";
 
 firebase.initializeApp({
   apiKey: "AIzaSyDVrBdO44BUwk5YcqWFkdpVGsJUwkawGas",
@@ -52,9 +53,8 @@ function App() {
         `https://api.themoviedb.org/3/genre/${movieOrTv}/list?api_key=${apiConfiguration.apiKey}`
       )
       .then((response) => {
-        const genres = [];
-        response.data.genres.map((elem) => {
-          genres.push(elem);
+        response.data.genres.map((genre) => {
+          genres[genre.id] = genre.name;
         });
         const temp = new Object(apiConfiguration);
         temp[movieOrTv] = genres;
@@ -73,9 +73,9 @@ function App() {
           <BrowserRouter>
             <TopNavbar />
             <Routes>
-              <Route path="/" element={<Browse />} />
+              <Route path="/" element={<Movies />} />
               <Route path="/home" element={<Home />} />
-              <Route path="/browse" element={<Browse />} />
+              <Route path="/movies" element={<Movies />} />
               <Route path="/social" element={<Social />} />
               <Route path="/person" element={<Person />} />
             </Routes>

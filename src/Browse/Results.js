@@ -3,6 +3,7 @@ import ReactPlayer from "react-player";
 import { useState, useContext } from "react";
 import axios from "axios";
 import ApiContext from "../ApiContext";
+import { Movie } from "../Movie/Movie";
 
 const Results = ({ movies }) => {
   const [moviesVideoId, setMoviesVideoId] = useState([]);
@@ -27,7 +28,7 @@ const Results = ({ movies }) => {
           if (key % 2) {
             return (
               <div className="item" key={key}>
-                <MovieCard data={element} />
+                <MovieCard movie={element} />
               </div>
             );
           }
@@ -60,7 +61,7 @@ const Results = ({ movies }) => {
           );
         })
       ) : (
-        <p>loading...</p>
+        <p>loading... </p>
       )}
     </div>
   );
