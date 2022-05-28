@@ -1,16 +1,14 @@
 import axios from "axios";
 import ApiContext from "../ApiContext";
 import { useContext, useEffect, useState } from "react";
-import { genres, Movie } from "./Movie";
 import MovieVideo from "./MovieVideo";
+import { Movie } from "../Types";
 import "../style/Modal.css";
-import { ToggleButton } from "react-bootstrap";
 
 const MovieModal = (props: { movie: Movie; toggleModal: Function }) => {
   const apiConfiguration = useContext(ApiContext);
-  const [showModal, setShowModal] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
-  let bgImageUrl = `${apiConfiguration.images.base_url}/w1280/${props.movie.verticalImgUrl}?api_key=${apiConfiguration.apiKey}`;
+  let bgImageUrl = `${apiConfiguration.base_url}/w1280/${props.movie.verticalImgUrl}?api_key=${apiConfiguration.apiKey}`;
 
   useEffect(() => {
     requestMovieVideos();
@@ -28,16 +26,8 @@ const MovieModal = (props: { movie: Movie; toggleModal: Function }) => {
             return video.key;
           }
         });
-        console.log(props.movie.listOfTrailerUrl);
         setVideoLoaded(true);
       });
-  }
-
-  function readableGenres() {
-    return props.movie.genreIds.map((genreId) => {
-      //return max: 3 genres to not make a list of 7 genres in one movie
-      return genres[genreId].genreString;
-    });
   }
 
   return (
@@ -61,7 +51,14 @@ const MovieModal = (props: { movie: Movie; toggleModal: Function }) => {
         </div>
         <div className="modal-card-item">
           <p id="release-date">{props.movie.year}</p>
-          {readableGenres()}
+          {props.movie.genreIds.map((genreId, key) => {
+            //return max: 3 genres to not make a list of 7 genres in one movie
+            return (
+              <p className="genre-name" key={key}>
+                {apiConfiguration.genres[genreId]}
+              </p>
+            );
+          })}
         </div>
         <div className="modal-card-item">
           <i className="fa fa-star" aria-hidden="true"></i>

@@ -16,11 +16,3 @@ export type Movie = {
   listOfTrailerUrl?: string[] /* a movie might not have any videos/trailers */;
   adult: boolean;
 };
-
-/* dictionary for movie (genre id) <-> (genre name) */
-
-export let genres: {
-  [id: number]: {
-    genreString: string;
-  };
-} = {};

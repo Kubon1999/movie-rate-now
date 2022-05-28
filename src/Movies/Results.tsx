@@ -2,7 +2,7 @@ import MovieCard from "../Movie/MovieCard";
 import { useState, useContext } from "react";
 import axios from "axios";
 import ApiContext from "../ApiContext";
-import { Movie } from "../Movie/Movie";
+import { Movie } from "../Types";
 
 const Results = (props: { movies: Movie[] }) => {
   const [moviesVideoId, setMoviesVideoId] = useState([]);

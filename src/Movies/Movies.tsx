@@ -1,7 +1,7 @@
 import axios from "axios";
 import ApiContext from "../ApiContext";
 import { useEffect, useContext, useState } from "react";
-import { Select, SegmentedControl } from "@mantine/core";
+import { Select } from "@mantine/core";
 import Results from "./Results";
 
 const Movies = () => {
@@ -14,7 +14,7 @@ const Movies = () => {
 
   /* on first load of api load categories and movies*/
   useEffect(() => {
-    if (!apiConfiguration.loading) {
+    if (apiConfiguration != null) {
       requestCategories();
       requestMovies();
     }
@@ -22,7 +22,7 @@ const Movies = () => {
 
   /* every time user changes movie category request new movies from this category */
   useEffect(() => {
-    if (!apiConfiguration.loading) {
+    if (apiConfiguration) {
       requestMovies();
     }
   }, [category]);

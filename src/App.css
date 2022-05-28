@@ -88,6 +88,13 @@ figure:hover figcaption {
   align-content: flex-start;
   align-items: stretch;
   gap: 5%;
+  /* for the mantine LoadingOverlay:
+   -- Overlay had absolute position and will take 100% of width and height 
+   -- of nearest parent container with relative position.
+  https://mantine.dev/core/loading-overlay/
+  so the loadingoverlay will display on top of the results.tsx
+   */
+  position: relative;
 }
 
 /*default -  mobile */
