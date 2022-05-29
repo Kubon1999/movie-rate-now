@@ -69,12 +69,10 @@ const MovieModal = (props: { movie: Movie; toggleModal: Function }) => {
           <p>{props.movie.numberOfVotes} votes</p>
         </div>
         <div className="modal-card-item">
-          <p>
+          <p id="description">
             {
-              /* change later to scrollable description */ props.movie.description.substring(
-                0,
-                250
-              )
+              /* change later to scrollable description */
+              props.movie.description
             }
           </p>
         </div>

@@ -5,7 +5,7 @@ const BottomNavbar = () => {
       <NavLink to="/home">
         <i className="fa fa-home"></i>
       </NavLink>
-      <NavLink to="/browse">
+      <NavLink to="/movies">
         <i className="fa fa-search"></i>
       </NavLink>
 

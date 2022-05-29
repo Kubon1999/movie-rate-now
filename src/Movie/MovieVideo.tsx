@@ -5,7 +5,7 @@ const MovieVideo = (props: { videoUrl: string }) => {
 
   /* show either the youtube video or play icon */
   return showVideo ? (
-    <div className="modal-card-item">
+    <div className="modal-card-item-video">
       <iframe
         src={`https://www.youtube.com/embed/${props.videoUrl}`}
         height="100%"
