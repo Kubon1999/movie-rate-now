@@ -12,7 +12,7 @@ const BottomNavbar = () => {
       {/* <NavLink to="/social">
         <i className="fa fa-heart"></i>
       </NavLink>
-      <NavLink to="/person">
+      <NavLink to="/person">s
         <i className="fa fa-user"></i>
       </NavLink> */}
     </div>

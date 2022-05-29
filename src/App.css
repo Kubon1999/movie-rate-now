@@ -105,7 +105,7 @@ figure:hover figcaption {
 }
 
 .item-w2 {
-  flex-basis: 100%; /* gap 5% 100-5 = 95 / 2 = 47.5 */
+  flex-basis: 100%;
 }
 
 .item img {

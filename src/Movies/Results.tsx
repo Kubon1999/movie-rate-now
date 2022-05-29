@@ -3,7 +3,7 @@ import { Movie } from "../Types";
 
 const Results = (props: { movies: Movie[] }) => {
   return (
-    <div className="flex-container">
+    <>
       {props.movies.map((movie, key) => {
         return (
           <div className="item" key={key}>
@@ -11,7 +11,7 @@ const Results = (props: { movies: Movie[] }) => {
           </div>
         );
       })}
-    </div>
+    </>
   );
 };
 

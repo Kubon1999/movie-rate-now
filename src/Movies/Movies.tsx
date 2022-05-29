@@ -78,7 +78,7 @@ const Movies = () => {
   return (
     <>
       {genresList ? (
-        <>
+        <div className="flex-container">
           <Select
             label="Category"
             placeholder="Choose genre"
@@ -86,13 +86,13 @@ const Movies = () => {
             nothingFound="Not found"
             data={genresList}
             clearable
-            className="py-3 px-4"
+            className="pb-5 item-w2"
             onChange={(e: number) => {
               setSelectedGenre(e);
             }}
           />
           {movies && <Results movies={movies} />}
-        </>
+        </div>
       ) : null}
     </>
   );
