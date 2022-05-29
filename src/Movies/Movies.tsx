@@ -1,41 +1,47 @@
 import axios from "axios";
-import ApiContext from "../ApiContext";
+import { ApiContext } from "../ApiContext";
 import { useEffect, useContext, useState } from "react";
 import { Select } from "@mantine/core";
 import Results from "./Results";
+import { Movie } from "../Types";
+
+type genresToChooseFrom = {
+  label: string;
+  value: number;
+  key: number;
+};
 
 const Movies = () => {
   //get the trending data from api
   //api.themoviedb.org/3/trending/all/day?api_key=<<api_key>>
   const apiConfiguration = useContext(ApiContext);
-  const [movies, setMovies] = useState();
-  const [categories, setCategories] = useState();
-  const [category, setCategory] = useState({ name: "Action", id: 28 });
+  const [movies, setMovies] = useState<Movie[]>();
+  const [genresList, setGenresList] = useState<genresToChooseFrom[]>();
+  const [selectedGenre, setSelectedGenre] = useState(28); // 28 - action
 
   /* on first load of api load categories and movies*/
   useEffect(() => {
     if (apiConfiguration != null) {
-      requestCategories();
+      requestGenres();
       requestMovies();
     }
   }, [apiConfiguration]);
 
-  /* every time user changes movie category request new movies from this category */
+  /* every time user changes movie genre request new movies from this genre */
   useEffect(() => {
     if (apiConfiguration) {
       requestMovies();
     }
-  }, [category]);
+  }, [selectedGenre]);
 
   async function requestMovies() {
     axios
       .get(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${apiConfiguration.apiKey}&language=en-US&with_genres=${category.id}`
+        `https://api.themoviedb.org/3/discover/movie?api_key=${apiConfiguration.apiKey}&language=en-US&with_genres=${selectedGenre}`
       )
       .then((response) => {
         // convert movies from api -> type Movie (Movie.tsx)
-        console.log(response.data.results);
-        const moviesArray = response.data.results.map((movie) => {
+        const moviesArray: Movie[] = response.data.results.map((movie) => {
           return {
             id: movie.id,
             title: movie.original_title,
@@ -53,34 +59,36 @@ const Movies = () => {
       });
   }
 
-  async function requestCategories() {
-    // fetch categories from the api
+  async function requestGenres() {
+    // fetch genres from the api
     axios
       .get(
         `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiConfiguration.apiKey}`
       )
       .then((response) => {
-        const categoriesForSelect = response.data.genres.map((elem, key) => {
-          return { label: elem.name, value: elem, key: key };
-        });
-        setCategories(categoriesForSelect);
+        const genresToSelect: genresToChooseFrom[] = response.data.genres.map(
+          (elem, key) => {
+            return { label: elem.name, value: elem.id, key: key };
+          }
+        );
+        setGenresList(genresToSelect);
       });
   }
 
   return (
     <>
-      {categories ? (
+      {genresList ? (
         <>
           <Select
             label="Category"
             placeholder="Choose genre"
             searchable
             nothingFound="Not found"
-            data={categories}
+            data={genresList}
             clearable
             className="py-3 px-4"
-            onChange={(e) => {
-              setCategory(e);
+            onChange={(e: number) => {
+              setSelectedGenre(e);
             }}
           />
           {movies && <Results movies={movies} />}

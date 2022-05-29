@@ -3,18 +3,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
-import axios from "axios";
-import ApiContext from "./ApiContext";
+import {Api, ApiContext} from "./ApiContext";
 import { useEffect, useState } from "react";
 import { MantineProvider } from "@mantine/core";
 import BottomNavbar from "./BottomNavbar";
 import Home from "./Home/Home.js";
 import Social from "./Social/Social.js";
 import Person from "./Person/Person.js";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TopNavbar from "./TopNavbar";
 import Movies from "./Movies/Movies";
-import { Api } from "./ApiContext";
+import axios from "axios";
 
 firebase.initializeApp({
   apiKey: "AIzaSyDVrBdO44BUwk5YcqWFkdpVGsJUwkawGas",
@@ -28,27 +27,46 @@ firebase.initializeApp({
 
 function App() {
   /* state for api context */
-  const [apiInitializationSuccessfull, setApiInitializationSuccessfull] =
-    useState(false);
-  let api = new Api("8fec1c7af2cd769b4da8683430f356c5");
+  const [isLoading, setIsLoading] = useState(true);
+  const [api, setApi] = useState<Api>();
 
+  /* first - request base_url from the api */
   useEffect(() => {
-    /* first run get basic api configuration & set apiContext */
-    api.initialize().then((value) => {
-      console.log("eee");
-      setApiInitializationSuccessfull(true);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (apiInitializationSuccessfull) {
-      api.requestGenres();
+    async function setBaseUrl() {
+      try {
+        // api key
+        const apiKey = "8fec1c7af2cd769b4da8683430f356c5";
+        //get base_url
+        let requestedBaseUrl = await axios.get(
+          `https://api.themoviedb.org/3/configuration?api_key=${apiKey}`
+        );
+        // get genres
+        let requestedGenres = await axios.get(
+          `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`
+        );
+        let genresArr: string[] = [];
+        requestedGenres.data.genres.map((genre) => {
+          genresArr[genre.id] = genre.name;
+        });
+        // set apikey, base_url, genres
+        setApi({
+          apiKey: apiKey,
+          base_url: requestedBaseUrl.data.images.base_url,
+          genres: genresArr,
+        });
+        // api loaded - load the page
+        setIsLoading(false);
+      } catch (err) {
+        console.log(err);
+      }
     }
-  }, [apiInitializationSuccessfull]);
+
+    setBaseUrl();
+  }, []);
 
   return (
     <div>
-      {apiInitializationSuccessfull ? (
+      {!isLoading ? (
         <MantineProvider
           theme={{ colorScheme: "dark" }}
           withGlobalStyles
@@ -69,7 +87,10 @@ function App() {
           </ApiContext.Provider>
         </MantineProvider>
       ) : (
-        <h1>Ups! Our service is temporarly down! Come back later.</h1>
+        <h1>
+          Ups! Our service is temporarly down! Try to refresh the page if it
+          does not work - Come back later.
+        </h1>
       )}
     </div>
   );

@@ -1,5 +1,5 @@
 import axios from "axios";
-import ApiContext from "../ApiContext";
+import { ApiContext } from "../ApiContext";
 import { useContext, useEffect, useState } from "react";
 import MovieVideo from "./MovieVideo";
 import { Movie } from "../Types";
@@ -15,7 +15,7 @@ const MovieModal = (props: { movie: Movie; toggleModal: Function }) => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   /* function that gets all the trailers/videos available for the movie */
-  async function requestMovieVideos() {
+  function requestMovieVideos() {
     axios
       .get(
         `https://api.themoviedb.org/3/movie/${props.movie.id}/videos?api_key=${apiConfiguration.apiKey}`
@@ -32,6 +32,7 @@ const MovieModal = (props: { movie: Movie; toggleModal: Function }) => {
 
   return (
     <div className="modal-view">
+      {/* background*/}
       <div
         className="modal-card"
         style={{
@@ -41,9 +42,11 @@ const MovieModal = (props: { movie: Movie; toggleModal: Function }) => {
           backgroundRepeat: "no-repeat",
         }}
       >
+        {/* video */}
         {videoLoaded ? (
           <MovieVideo videoUrl={props.movie.listOfTrailerUrl[0]} />
         ) : null}
+        {/* lover part of modal - title desc genres rate */}
         <div className="modal-card-item">
           <h1>
             <b>{props.movie.title}</b>
@@ -75,6 +78,7 @@ const MovieModal = (props: { movie: Movie; toggleModal: Function }) => {
             }
           </p>
         </div>
+        {/* X in the top right - calling callback in the MovieCard.tsx */}
         <i
           className="fa fa-times"
           aria-hidden="true"

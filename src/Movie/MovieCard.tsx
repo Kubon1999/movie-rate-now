@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import ApiContext from "../ApiContext";
+import { ApiContext } from "../ApiContext";
 import { Movie } from "../Types";
 import MovieModal from "./MovieModal";
 import { LoadingOverlay } from "@mantine/core";

@@ -3,6 +3,7 @@ import { useState } from "react";
 const MovieVideo = (props: { videoUrl: string }) => {
   const [showVideo, setShowVideo] = useState(false); //now ts knows showVideo should be a boolean
 
+  /* show either the youtube video or play icon */
   return showVideo ? (
     <div className="modal-card-item">
       <iframe

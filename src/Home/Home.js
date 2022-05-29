@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
-import ApiContext from "../ApiContext";
+import { ApiContext } from "../ApiContext";
 import Results from "../Movies/Results";
 import ReactPlayer from "react-player";
 
