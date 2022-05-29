@@ -5,12 +5,25 @@
   list-style-type: none;
   background-color: #1a1b1e;
   padding: 0;
-  margin: 0;
+  /* margin for mobile devices */
+  margin: 50px;
+  /* on mobile the bottom navbar covers the content */
+  margin-bottom: 100px;
+  gap: 10px;
+}
+
+.featured-videos-grid .cards {
+  margin: auto;
 }
 
 .featured-videos-grid figure {
   padding: 0;
   margin: 0;
+}
+
+.featured-videos-grid img {
+  object-fit: cover;
+  max-width: 100%;
 }
 
 .featured-videos-grid h1,
@@ -26,7 +39,6 @@
     grid-template-columns: repeat(6, auto);
     grid-template-rows: repeat(4, auto);
     gap: 10px;
-    margin: 50px;
   }
 
   .featured-videos-grid img {
