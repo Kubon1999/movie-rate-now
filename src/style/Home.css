@@ -1,0 +1,61 @@
+/* grid for content */
+/* figure contains another grid that is caption and img that are overlapping eachother */
+.featured-videos-grid {
+  display: grid;
+  list-style-type: none;
+  background-color: #1a1b1e;
+  padding: 0;
+  margin: 0;
+}
+
+.featured-videos-grid figure {
+  padding: 0;
+  margin: 0;
+}
+
+.featured-videos-grid h1,
+.featured-videos-grid p {
+  color: white;
+  font-family: "Sora", sans-serif;
+}
+
+/* display grid on mobile just stack on desktop:*/
+
+@media (min-width: 800px) {
+  .featured-videos-grid {
+    grid-template-columns: repeat(6, auto);
+    grid-template-rows: repeat(4, auto);
+    gap: 10px;
+    margin: 50px;
+  }
+
+  .featured-videos-grid img {
+    object-fit: cover;
+    max-width: 100%;
+  }
+
+  .featured-videos-grid li {
+    /* background-color: red; */
+    background-color: #1a1b1e;
+  }
+
+  .featured-videos-grid .text {
+    grid-row: span 3;
+    grid-column: span 1;
+  }
+
+  .featured-videos-grid .video {
+    grid-row: span 3;
+    grid-column: span 5;
+  }
+
+  .featured-videos-grid .cards {
+    grid-row: span 1;
+    grid-column: span 1;
+  }
+
+  .featured-videos-grid .small-text {
+    grid-row: span 1;
+    grid-column: span 1;
+  }
+}

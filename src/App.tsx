@@ -3,11 +3,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
-import {Api, ApiContext} from "./ApiContext";
+import { Api, ApiContext } from "./ApiContext";
 import { useEffect, useState } from "react";
 import { MantineProvider } from "@mantine/core";
 import BottomNavbar from "./BottomNavbar";
-import Home from "./Home/Home.js";
+import Home from "./Home/Home";
 import Social from "./Social/Social.js";
 import Person from "./Person/Person.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -75,13 +75,15 @@ function App() {
           <ApiContext.Provider value={api}>
             <BrowserRouter>
               <TopNavbar />
-              <Routes>
-                <Route path="/" element={<Movies />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/movies" element={<Movies />} />
-                <Route path="/social" element={<Social />} />
-                <Route path="/person" element={<Person />} />
-              </Routes>
+              <body>
+                <Routes>
+                  <Route path="/" element={<Movies />} />
+                  <Route path="/home" element={<Home />} />
+                  <Route path="/movies" element={<Movies />} />
+                  <Route path="/social" element={<Social />} />
+                  <Route path="/person" element={<Person />} />
+                </Routes>
+              </body>
               <BottomNavbar />
             </BrowserRouter>
           </ApiContext.Provider>
